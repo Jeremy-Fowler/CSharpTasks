@@ -7,7 +7,7 @@ namespace CSharpTasks.Models
     [Required]
     public int TaskId { get; set; }
     [Required]
-    public int UserId { get; set; }
+    public string UserId { get; set; }
     public Profile User { get; set; }
     public TaskItem TaskItem { get; set; }
   }

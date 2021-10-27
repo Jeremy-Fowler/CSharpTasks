@@ -68,16 +68,17 @@ namespace CSharpTasks.Repositories
       }, new { taskId }).ToList();
     }
 
+
+    public UserTask GetById(int id)
+    {
+      string sql ="SELECT * FROM user_tasks WHERE id = @id;";
+      return _db.Query(sql, new { id }).FirstOrDefault();
+    }
+
     public List<UserTask> GetAll()
     {
       throw new System.NotImplementedException();
     }
-
-    public UserTask GetById(int id)
-    {
-      throw new System.NotImplementedException();
-    }
-
     public UserTask Update(UserTask data)
     {
       throw new System.NotImplementedException();
