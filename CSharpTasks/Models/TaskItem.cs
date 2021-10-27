@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 namespace CSharpTasks.Models
 {
   
-    public class Task : DbItem<int>
+    public class TaskItem : DbItem<int>
   {
     [Required]
     public string Name { get; set; }
