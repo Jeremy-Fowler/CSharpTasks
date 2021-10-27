@@ -6,10 +6,12 @@ namespace CSharpTasks.Services
   public class UserTasksService
   {
     private readonly UserTasksRepository _usertasksRepository;
+    private readonly TaskListsService _taskListsService;
 
-    public UserTasksService(UserTasksRepository usertasksRepository)
+    public UserTasksService(UserTasksRepository usertasksRepository, TaskListsService taskListsService)
     {
       _usertasksRepository = usertasksRepository;
+      _taskListsService = taskListsService;
     }
 
     public UserTask CreateUserTask(UserTask data)
@@ -28,6 +30,6 @@ namespace CSharpTasks.Services
       _usertasksRepository.Delete(userTaskId);
       return userTask;      
     }
-    
+
   }
 }
