@@ -14,11 +14,13 @@ namespace CSharpTasks.Controllers
   {
     private readonly TaskListsService _taskListsService;
     private readonly UserTasksService _userTasksService;
+    private readonly TaskItemsService _taskItemsService;
 
-    public TaskListsController(TaskListsService taskListsService, UserTasksService userTasksService)
+    public TaskListsController(TaskListsService taskListsService, UserTasksService userTasksService, TaskItemsService taskItemsService)
     {
       _taskListsService = taskListsService;
       _userTasksService = userTasksService;
+      _taskItemsService = taskItemsService;
     }
 
     [HttpPost]
@@ -94,6 +96,20 @@ namespace CSharpTasks.Controllers
           Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
           TaskList taskList = _taskListsService.Update(userInfo.Id, taskListId, data);
           return Ok(taskList);
+      }
+      catch (System.Exception e)
+      {
+          
+          return BadRequest(e.Message);
+      }
+    }
+    [HttpGet("{taskListId}/taskItems")]
+    public ActionResult<List<TaskItem>> GetTaskItemsByTaskListId(int taskListId)
+    {
+      try
+      {
+       List<TaskItem> taskItems = _taskItemsService.GetTaskItemsByTaskListId(taskListId);
+       return Ok(taskItems);
       }
       catch (System.Exception e)
       {
