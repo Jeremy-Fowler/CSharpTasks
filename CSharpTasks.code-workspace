@@ -8,10 +8,6 @@
     {
       "path": "CSharpTasks",
       "name": "server"
-    },
-    {
-      "name": "CSharpTasks",
-      "path": "."
     }
   ],
   "settings": {
