@@ -24,9 +24,9 @@ namespace CSharpTasks.Services
       throw new NotImplementedException();
     }
 
-    internal TaskItem Delete(string userId, int taskItemId)
+    internal TaskItem Delete(string userId, int taskItemId, int taskListId)
     {
-      var taskItem = GetById(taskItemId);
+      var taskList = GetById(taskItemId);
       
     }
 
