@@ -37,12 +37,12 @@ namespace CSharpTasks.Controllers
     }
     [HttpDelete("{taskItemId}")]
     [Authorize]
-    public async Task<ActionResult<TaskItem>> Delete(int taskItemId)
+    public async Task<ActionResult<TaskItem>> Delete(int taskItemId, [FromBody] TaskItem data)
     {
       try
       {
         Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-        TaskItem taskItem = _taskItemsService.Delete(userInfo.Id, taskItemId);
+        TaskItem taskItem = _taskItemsService.Delete(userInfo.Id, taskItemId, data);
         return Ok(taskItem);
       }
       catch (System.Exception e)

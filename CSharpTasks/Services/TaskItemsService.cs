@@ -8,10 +8,12 @@ namespace CSharpTasks.Services
   public class TaskItemsService
   {
     private readonly TasksRepository _tasksRepository;
+    private readonly TaskListsService _taskListsService;
 
-    public TaskItemsService(TasksRepository tasksRepository)
+    public TaskItemsService(TasksRepository tasksRepository, TaskListsService taskListsService)
     {
       _tasksRepository = tasksRepository;
+      _taskListsService = taskListsService;
     }
 
     internal List<TaskItem> GetTaskItemsByTaskListId(int taskListId)
@@ -24,10 +26,20 @@ namespace CSharpTasks.Services
       throw new NotImplementedException();
     }
 
-    internal TaskItem Delete(string userId, int taskItemId, int taskListId)
+    internal TaskItem Delete(string userId, int taskItemId, TaskItem data)
     {
-      var taskList = GetById(taskItemId);
-      
+      if(taskItemId != data.Id)
+      {
+        throw new Exception("NO WAY, JOSIE");
+      }
+      var taskList = _taskListsService.GetById(data.ListId);
+      if (taskList.CreatorId != userId)
+      {
+        throw new Exception("NO WAY, JOSIE");
+      }
+      var taskItem = GetById(taskItemId);
+      _tasksRepository.Delete(taskItemId);
+      return taskItem;
     }
 
     internal TaskItem GetById(int taskItemId)
